@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_25_091501) do
+ActiveRecord::Schema.define(version: 2019_06_01_091321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,37 @@ ActiveRecord::Schema.define(version: 2019_05_25_091501) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "attendances", force: :cascade do |t|
+    t.string "presence"
+    t.text "description"
+    t.boolean "excused"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "class_templates", force: :cascade do |t|
+    t.string "name"
+    t.date "year"
+    t.integer "semester"
+    t.boolean "archived"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "marks", force: :cascade do |t|
+    t.string "mark"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text "note"
+    t.boolean "note_valid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "parents", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -50,10 +81,28 @@ ActiveRecord::Schema.define(version: 2019_05_25_091501) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "real_classes", force: :cascade do |t|
+    t.string "name"
+    t.date "year"
+    t.integer "semester"
+    t.boolean "active"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

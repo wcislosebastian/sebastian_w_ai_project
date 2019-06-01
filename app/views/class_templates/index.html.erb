@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Class Templates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+      <th>Semester</th>
+      <th>Archived</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @class_templates.each do |class_template| %>
+      <tr>
+        <td><%= class_template.name %></td>
+        <td><%= class_template.year %></td>
+        <td><%= class_template.semester %></td>
+        <td><%= class_template.archived %></td>
+        <td><%= link_to 'Show', class_template %></td>
+        <td><%= link_to 'Edit', edit_class_template_path(class_template) %></td>
+        <td><%= link_to 'Destroy', class_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Class Template', new_class_template_path %>
