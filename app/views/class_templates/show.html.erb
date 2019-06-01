@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @class_template.name %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @class_template.year %>
+</p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @class_template.semester %>
+</p>
+
+<p>
+  <strong>Archived:</strong>
+  <%= @class_template.archived %>
+</p>
+
+<%= link_to 'Edit', edit_class_template_path(@class_template) %> |
+<%= link_to 'Back', class_templates_path %>

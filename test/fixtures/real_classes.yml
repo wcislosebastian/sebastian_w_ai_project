@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  year: 2019-06-01
+  semester: 1
+  active: false
+  start_date: 2019-06-01
+  end_date: 2019-06-01
+
+two:
+  name: MyString
+  year: 2019-06-01
+  semester: 1
+  active: false
+  start_date: 2019-06-01
+  end_date: 2019-06-01

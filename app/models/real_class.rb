@@ -1,0 +1,2 @@
+class RealClass < ApplicationRecord
+end
