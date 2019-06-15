@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_091321) do
+ActiveRecord::Schema.define(version: 2019_06_15_055152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,14 @@ ActiveRecord::Schema.define(version: 2019_06_01_091321) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "teacher_id"
+    t.bigint "parent_id"
+    t.bigint "student_id"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["parent_id"], name: "index_admin_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+    t.index ["student_id"], name: "index_admin_users_on_student_id"
+    t.index ["teacher_id"], name: "index_admin_users_on_teacher_id"
   end
 
   create_table "attendances", force: :cascade do |t|
@@ -47,6 +53,10 @@ ActiveRecord::Schema.define(version: 2019_06_01_091321) do
     t.boolean "excused"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "real_class_id"
+    t.bigint "student_id"
+    t.index ["real_class_id"], name: "index_attendances_on_real_class_id"
+    t.index ["student_id"], name: "index_attendances_on_student_id"
   end
 
   create_table "class_templates", force: :cascade do |t|
@@ -63,6 +73,14 @@ ActiveRecord::Schema.define(version: 2019_06_01_091321) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "real_class_id"
+    t.bigint "teacher_id"
+    t.bigint "student_id"
+    t.bigint "subject_id"
+    t.index ["real_class_id"], name: "index_marks_on_real_class_id"
+    t.index ["student_id"], name: "index_marks_on_student_id"
+    t.index ["subject_id"], name: "index_marks_on_subject_id"
+    t.index ["teacher_id"], name: "index_marks_on_teacher_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -70,6 +88,12 @@ ActiveRecord::Schema.define(version: 2019_06_01_091321) do
     t.boolean "note_valid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "real_class_id"
+    t.bigint "teacher_id"
+    t.bigint "student_id"
+    t.index ["real_class_id"], name: "index_notes_on_real_class_id"
+    t.index ["student_id"], name: "index_notes_on_student_id"
+    t.index ["teacher_id"], name: "index_notes_on_teacher_id"
   end
 
   create_table "parents", force: :cascade do |t|
@@ -114,4 +138,16 @@ ActiveRecord::Schema.define(version: 2019_06_01_091321) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "admin_users", "parents"
+  add_foreign_key "admin_users", "students"
+  add_foreign_key "admin_users", "teachers"
+  add_foreign_key "attendances", "real_classes"
+  add_foreign_key "attendances", "students"
+  add_foreign_key "marks", "real_classes"
+  add_foreign_key "marks", "students"
+  add_foreign_key "marks", "subjects"
+  add_foreign_key "marks", "teachers"
+  add_foreign_key "notes", "real_classes"
+  add_foreign_key "notes", "students"
+  add_foreign_key "notes", "teachers"
 end

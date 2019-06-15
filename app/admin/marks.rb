@@ -2,7 +2,7 @@ ActiveAdmin.register Mark do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :mark, :description
+permit_params :mark, :description, :real_class_id, :teacher_id, :student_id, :subject_id
 #
 # or
 #
