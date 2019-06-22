@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_055152) do
+ActiveRecord::Schema.define(version: 2019_06_15_081447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,11 @@ ActiveRecord::Schema.define(version: 2019_06_15_055152) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "class_templates_subjects", id: false, force: :cascade do |t|
+    t.bigint "subject_id", null: false
+    t.bigint "class_template_id", null: false
+  end
+
   create_table "marks", force: :cascade do |t|
     t.string "mark"
     t.text "description"
@@ -105,6 +110,11 @@ ActiveRecord::Schema.define(version: 2019_06_15_055152) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "parents_students", id: false, force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "parent_id", null: false
+  end
+
   create_table "real_classes", force: :cascade do |t|
     t.string "name"
     t.date "year"
@@ -114,6 +124,18 @@ ActiveRecord::Schema.define(version: 2019_06_15_055152) do
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "class_template_id"
+    t.index ["class_template_id"], name: "index_real_classes_on_class_template_id"
+  end
+
+  create_table "real_classes_students", id: false, force: :cascade do |t|
+    t.bigint "real_class_id", null: false
+    t.bigint "student_id", null: false
+  end
+
+  create_table "real_classes_teachers", id: false, force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "real_class_id", null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -129,6 +151,11 @@ ActiveRecord::Schema.define(version: 2019_06_15_055152) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subjects_teachers", id: false, force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "subject_id", null: false
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -150,4 +177,5 @@ ActiveRecord::Schema.define(version: 2019_06_15_055152) do
   add_foreign_key "notes", "real_classes"
   add_foreign_key "notes", "students"
   add_foreign_key "notes", "teachers"
+  add_foreign_key "real_classes", "class_templates"
 end

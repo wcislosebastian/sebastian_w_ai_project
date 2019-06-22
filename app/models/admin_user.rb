@@ -3,7 +3,7 @@ class AdminUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
-  belongs_to :teacher
-  belongs_to :student
-  belongs_to :parent
+  belongs_to :teacher, optional: true
+  belongs_to :student, optional: true
+  belongs_to :parent, optional: true
 end
