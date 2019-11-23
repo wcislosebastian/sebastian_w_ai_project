@@ -2,7 +2,7 @@ ActiveAdmin.register RealClass do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-  permit_params :name, :year, :semester, :active, :start_date, :end_date, :class_template_id, student_ids: []
+  permit_params :name, :year, :semester, :active, :start_date, :end_date, :class_template_id, student_ids: [], subject_ids: []
 #
 # or
 #
@@ -17,7 +17,7 @@ ActiveAdmin.register RealClass do
       table_for real_class.students do
         column :first_name
         column :last_name
-        column :marks
+        column :real_class_marks
         column :attendances
         column :notes
       end
@@ -40,6 +40,7 @@ ActiveAdmin.register RealClass do
       f.input :end_date
       f.input :class_template
       f.input :students, :as => :select, :input_html => {:multiple => true}
+      # f.input :subjects, :as => :select, :input_html => {:multiple => true}
     end
     f.actions
   end
