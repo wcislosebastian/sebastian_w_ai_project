@@ -20,6 +20,7 @@ permit_params :first_name, :last_name, :address
         column :real_class
       end
     end
+
   end
 
 end
