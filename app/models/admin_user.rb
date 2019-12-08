@@ -10,6 +10,6 @@ class AdminUser < ApplicationRecord
   after_create :send_email
 
   def send_email
-    RestClient.get 'http://localhost:3001/submit_email'
+    RestClient.get 'http://sebastian_w_lin_mailer_web_1:3001/submit_email'
   end
 end
