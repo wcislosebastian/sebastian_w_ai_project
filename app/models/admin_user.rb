@@ -6,4 +6,10 @@ class AdminUser < ApplicationRecord
   belongs_to :teacher, optional: true
   belongs_to :student, optional: true
   belongs_to :parent, optional: true
+
+  after_create :send_email
+
+  def send_email
+    RestClient.get 'http://localhost:3001/submit_email'
+  end
 end
